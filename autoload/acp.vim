@@ -120,6 +120,12 @@ function acp#meetsForRubyOmni(context)
 endfunction
 
 "
+function acp#meetsForJavaOmni(context)
+  return g:acp_behaviorJavaOmniLength >= 0 &&
+        \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaOmniLength . ',}$'
+endfunction
+
+"
 function acp#meetsForPythonOmni(context)
   return has('python') && g:acp_behaviorPythonOmniLength >= 0 &&
         \ a:context =~ '\k\.\k\{' . g:acp_behaviorPythonOmniLength . ',}$'
@@ -139,11 +145,11 @@ function acp#meetsForPhpOmni(context)
   if a:context =~ '[^a-zA-Z0-9_:>\$]$'
     return 0
   endif
-  if a:context =~ 'new \k\{' . 
+  if a:context =~ 'new \k\{' .
      \            g:acp_behaviorPhpOmniLength . ',}$'
      return 1
   endif
-  if a:context =~ '\$\{' . 
+  if a:context =~ '\$\{' .
      \            g:acp_behaviorPhpOmniLength . ',}$'
      return 1
   endif
@@ -246,7 +252,7 @@ function acp#onPopupPost()
     endif
   endif
   let s:iBehavs += 1
-  if len(s:behavsCurrent) > s:iBehavs 
+  if len(s:behavsCurrent) > s:iBehavs
     call s:setCompletefunc()
     return printf("\<C-e>%s\<C-r>=acp#onPopupPost()\<CR>",
           \       s:behavsCurrent[s:iBehavs].command)

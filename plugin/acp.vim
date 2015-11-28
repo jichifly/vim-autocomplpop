@@ -3,7 +3,7 @@
 "
 " GetLatestVimScripts: 1879 1 :AutoInstall: AutoComplPop
 "=============================================================================
-" LOAD GUARD {{{1
+" LOAD GUARD
 
 try
   if !l9#guardScriptLoading(expand('<sfile>:p'), 702, 101, [])
@@ -14,14 +14,15 @@ catch /E117/
   finish
 endtry
 
-" }}}1
+"
 "=============================================================================
-" FUNCTION: {{{1
+" FUNCTION:
 
 "
 function s:makeDefaultBehavior()
   let behavs = {
         \   '*'         : [],
+        \   'java'      : [],
         \   'ruby'      : [],
         \   'python'    : [],
         \   'perl'      : [],
@@ -73,6 +74,12 @@ function s:makeDefaultBehavior()
           \   'repeat'  : 1,
           \ })
   endfor
+  "---------------------------------------------------------------------------
+  call add(behavs.java, {
+        \   'command' : "\<C-x>\<C-o>",
+        \   'meets'   : 'acp#meetsForJavaOmni',
+        \   'repeat'  : 0,
+        \ })
   "---------------------------------------------------------------------------
   call add(behavs.ruby, {
         \   'command' : "\<C-x>\<C-o>",
@@ -151,9 +158,9 @@ function s:makeDefaultBehavior()
   return behavs
 endfunction
 
-" }}}1a
+" a
 "=============================================================================
-" INITIaALIZATION {{{1
+" INITIaALIZATION
 
 "-----------------------------------------------------------------------------
 call l9#defineVariableDefault('g:acp_enableAtStartup', 1)
@@ -170,6 +177,7 @@ call l9#defineVariableDefault('g:acp_behaviorKeywordIgnores', [])
 call l9#defineVariableDefault('g:acp_behaviorFileLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorRubyOmniMethodLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorRubyOmniSymbolLength', 1)
+call l9#defineVariableDefault('g:acp_behaviorJavaOmniLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorPythonOmniLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorPerlOmniLength', -1)
 call l9#defineVariableDefault('g:acp_behaviorPhpOmniLength', 1)
@@ -197,6 +205,6 @@ if g:acp_enableAtStartup
 endif
 "-----------------------------------------------------------------------------
 
-" }}}1
+"
 "=============================================================================
 " vim: set fdm=marker:
