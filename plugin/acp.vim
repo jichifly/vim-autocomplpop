@@ -22,6 +22,7 @@ endtry
 function s:makeDefaultBehavior()
   let behavs = {
         \   '*'         : [],
+        \   'cpp'       : [],
         \   'java'      : [],
         \   'ruby'      : [],
         \   'python'    : [],
@@ -74,6 +75,12 @@ function s:makeDefaultBehavior()
           \   'repeat'  : 1,
           \ })
   endfor
+  "---------------------------------------------------------------------------
+  call add(behavs.cpp, {
+        \   'command' : "\<C-x>\<C-o>",
+        \   'meets'   : 'acp#meetsForCppOmni',
+        \   'repeat'  : 0,
+        \ })
   "---------------------------------------------------------------------------
   call add(behavs.java, {
         \   'command' : "\<C-x>\<C-o>",
@@ -177,6 +184,7 @@ call l9#defineVariableDefault('g:acp_behaviorKeywordIgnores', [])
 call l9#defineVariableDefault('g:acp_behaviorFileLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorRubyOmniMethodLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorRubyOmniSymbolLength', 1)
+call l9#defineVariableDefault('g:acp_behaviorCppOmniLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorJavaOmniLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorPythonOmniLength', 0)
 call l9#defineVariableDefault('g:acp_behaviorPerlOmniLength', -1)

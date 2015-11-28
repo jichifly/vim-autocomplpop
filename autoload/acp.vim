@@ -2,15 +2,15 @@
 " Copyright (c) 2007-2009 Takeshi NISHIDA
 "
 "=============================================================================
-" LOAD GUARD {{{1
+" LOAD GUARD
 
 if !l9#guardScriptLoading(expand('<sfile>:p'), 0, 0, [])
   finish
 endif
 
-" }}}1
+"
 "=============================================================================
-" GLOBAL FUNCTIONS: {{{1
+" GLOBAL FUNCTIONS:
 
 "
 function acp#enable()
@@ -117,6 +117,12 @@ function acp#meetsForRubyOmni(context)
     return 1
   endif
   return 0
+endfunction
+
+"
+function acp#meetsForCppOmni(context)
+  return g:acp_behaviorCppOmniLength >= 0 &&
+        \ a:context =~ '\k\(\.\|::\)\k\{' . g:acp_behaviorCppOmniLength . ',}$'
 endfunction
 
 "
@@ -277,9 +283,9 @@ function acp#onBs()
   return "\<C-e>\<BS>"
 endfunction
 
-" }}}1
+"
 "=============================================================================
-" LOCAL FUNCTIONS: {{{1
+" LOCAL FUNCTIONS:
 
 "
 function s:mapForMappingDriven()
@@ -465,9 +471,9 @@ function s:getMatchingSnipItems(base)
   return s:snipItems[key]
 endfunction
 
-" }}}1
+"
 "=============================================================================
-" INITIALIZATION {{{1
+" INITIALIZATION
 
 let s:TEMP_VARIABLES_GROUP0 = "AutoComplPop0"
 let s:TEMP_VARIABLES_GROUP1 = "AutoComplPop1"
@@ -476,6 +482,6 @@ let s:behavsCurrent = []
 let s:iBehavs = 0
 let s:snipItems = {}
 
-" }}}1
+"
 "=============================================================================
 " vim: set fdm=marker:
